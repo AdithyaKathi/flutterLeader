@@ -1,54 +1,27 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:leader/screens/login_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
+Future <void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Welcome"),
-        centerTitle: true,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'User Login',
+      theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
+        useMaterial3: true,
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 150,
-                child: Image.asset("assets/leader.png",fit: BoxFit.contain),
-              ),
-              Text(
-                "Welcome Back",
-                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-              ),
-
-              SizedBox(height: 10,),
-              Text(
-                "Name",
-                style: TextStyle(color: Colors.black54,fontWeight: FontWeight.w500,)),
-              Text(
-                "Email",
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontWeight: FontWeight.w500,
-                )
-              ),
-
-              SizedBox(height: 15,),
-              ActionChip(label: Text("Logout"),onPressed: (){}),
-            ],
-          ),
-        ),
-      ),
+      home: LoginScreen(),
     );
   }
 }
